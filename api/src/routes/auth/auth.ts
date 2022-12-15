@@ -13,8 +13,8 @@ router.get('/current-user',
 
 router.post('signin',
     [
-        body('email').isEmail().withMessage('Email must be valid'),,
-        body('password').trim().notEmpty().withMessage('You must supply a password')
+        body('email').isEmail().withMessage('Email must be valid'),
+        body('password').trim().notEmpty().withMessage('You must supply a password'),
     ],
     validateRequest,
     signinController)
