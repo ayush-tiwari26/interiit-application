@@ -4,6 +4,7 @@ import {
     Button,
     Stack,
 } from '@mui/material'
+import bcrypt from 'bcryptjs'
 
 export default function Login({ setShowLogin, userTokenState }) {
     const [userToken, setUserToken] = userTokenState;
@@ -26,9 +27,8 @@ export default function Login({ setShowLogin, userTokenState }) {
 
     function handleSignup(e) {
         //TODO Signup
-        console.log(name, email, password)
-        console.log(userToken)
-        setUserToken("demosignup")
+        const hashedPassword = bcrypt.hashSync(password, process.env.SEEDED_RANDOM_STRING);
+        console.log(process.env.BACKEND_BASE_URL)
     }
 
     return (
