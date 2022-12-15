@@ -1,24 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import Dashboard from './pages/Dashboard';
+import Auth from './pages/Auth';
+import React from 'react';
+import SnackbarStateProvider from './providers/SnackBarStateProvider';
+import Snackbar from './components/MuiComponents/Snackbar'
+import { UserTokenContext } from './providers/UserTokenProvider';
 
 function App() {
+  const {userToken, setUserToken} = React.useContext(UserTokenContext);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <SnackbarStateProvider>
+        <div className="App">
+          {userToken ? <Dashboard userTokenState={[userToken, setUserToken]} /> : <Auth userTokenState={[userToken, setUserToken]} />}
+        </div>
+        <Snackbar />
+      </SnackbarStateProvider>
   );
 }
 
