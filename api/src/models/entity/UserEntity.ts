@@ -4,15 +4,15 @@ import {Entity, PrimaryGeneratedColumn, Column} from 'typeorm'
 export class UserEntity{
     @PrimaryGeneratedColumn()
     id: number = 0;
-    
-    @Column('varchar', {unique: false, nullable: false})
-    name: string;
 
-    @Column('varchar', {unique: true, nullable: false})
-    email: string;
+    @Column('varchar', {length: 255, nullable: false})
+    name: string = "";
+
+    @Column('varchar', {unique: true, length: 255})
+    email: string = "";
 
     @Column('varchar', {nullable: false})
-    password: string;
+    password: string = "";
 
     constructor(name: string, email: string, password: string){
         this.name = name;

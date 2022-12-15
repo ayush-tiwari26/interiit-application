@@ -1,6 +1,7 @@
 import {app} from './app';
 import {AppDataSource} from '../omrconfig';
 import "reflect-metadata";
+require('dotenv').config();
 
 main();
 
@@ -10,5 +11,5 @@ async function main() {
     }
     await AppDataSource.initialize();
     console.log('Postgres connection established');
-    app.listen(process.env.PORT, () => console.log('Server is running on Port'+process.env.PORT));
+    app.listen(process.env.PORT, () => console.log('Server is running on Port '+process.env.PORT));
 }

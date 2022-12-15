@@ -8,6 +8,6 @@ if(process.env.DB_URL === undefined || process.env.NODE_ENV!=="production") {
 export const AppDataSource = new DataSource({
     type: "postgres",
     url: process.env.DB_URL,
-    entities: [UserEntity],
-    synchronize: true
+    synchronize: true,
+    entities: [UserEntity]
 })
