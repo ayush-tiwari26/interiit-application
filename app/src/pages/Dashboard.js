@@ -1,9 +1,10 @@
 import React from 'react'
-import { FileUploader } from '../components'
+import { FileUploader, FilesView } from '../components'
 
 export default function Dashboard() {
   return (
     <div>
+        <FilesView />
         <FileUploader />
     </div>
   )

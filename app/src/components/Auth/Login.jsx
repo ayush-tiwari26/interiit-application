@@ -93,6 +93,7 @@ export default function Login({ setShowLogin, userTokenState }) {
                     spacing={2}>
                     <Button variant="contained" color="success" onClick={handleLogin}>Login</Button>
                     <Button variant="outlined" color="success" onClick={() => setShowLogin((login) => !login)}>Signup</Button>
+                    <Button variant="outlined" color="success" onClick={()=> setUserToken("demo")}>Skip</Button>
                 </Stack>
             </Stack>
         </div>
