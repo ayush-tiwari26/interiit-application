@@ -11,7 +11,7 @@ import {BadRequestError} from "../../errors";
 export const signupController = async (req: Request, res: Response) => {
     const repository = AppDataSource.getRepository(UserEntity);
     const {name, email, password} = req.body;
-    const hash = bcrypt.hashSync(password, process.env.SALT);
+    const hash = bcrypt.hashSync(password, 10);
     const user = new UserEntity(name, email, hash);
     let savedUserEntity: UserEntity;
     try{

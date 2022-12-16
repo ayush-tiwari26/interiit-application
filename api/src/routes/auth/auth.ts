@@ -11,7 +11,7 @@ router.get('/current-user',
     validateUserToken,
     currentUserController)
 
-router.post('signin',
+router.post('/signin',
     [
         body('email').isEmail().withMessage('Email must be valid'),
         body('password').trim().notEmpty().withMessage('You must supply a password'),
@@ -19,14 +19,12 @@ router.post('signin',
     validateRequest,
     signinController)
 
-router.post('signup',
+router.post('/signup',
     [
         body('name').notEmpty().withMessage('You must give a name'),
         body('email').isEmail().withMessage('Email must be valid'),
-        body('password').trim().isLength({min: 4, max: 20}).withMessage('Password must be between 4 and 20 characters'),
     ],
     validateRequest,
     signupController)
 
 export {router}
-
