@@ -44,7 +44,7 @@ export default function FileUploader({setFiles}) {
             setSeverity("error")
             setOpenToast(true)
         })
-        setFiles((prevFiles)=>[...prevFiles,file])
+        setFiles((prevFiles)=>[...prevFiles,{name:file.name}])
         console.log(file)
     }
     return (

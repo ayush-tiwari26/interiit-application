@@ -3,8 +3,6 @@ import FileCard from './FileCard'
 import { Grid } from '@mui/material'
 
 export default function FilesView({files}) {
-    // TODO Get file list from api
-    
     return (
         <>
             <Grid container spacing={0}>
