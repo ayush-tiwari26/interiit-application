@@ -42,7 +42,7 @@ export default function Signup({ setShowLogin, userTokenState }) {
         });
         let config = {
             method: 'post',
-            url: 'http://localhost:5000/api/signup',
+            url: `${process.env.REACT_APP_BACKEND_BASE_URL}/api/signup`,
             withCredentials: false,
             crossdomain: true,
             headers: {

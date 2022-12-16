@@ -13,7 +13,7 @@ export const validateUserToken = (req: Request & {user?: unknown}, res: Response
         req.user = decoded.userSigninModel;
     } catch (err) {
         console.log(err);
-        throw new ForbiddenError("Invalid Admin Token");
+        throw new ForbiddenError("Invalid User Token");
     }
     next();
 }
