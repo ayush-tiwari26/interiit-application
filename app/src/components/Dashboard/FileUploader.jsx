@@ -5,7 +5,7 @@ import { SnackbarContext } from '../../providers/SnackBarStateProvider';
 import axios from 'axios';
 import { UserTokenContext } from '../../providers/UserTokenProvider';
 
-export default function FileUploader() {
+export default function FileUploader({setFiles}) {
     const {userToken} = React.useContext(UserTokenContext)
     const [file, setFile] = React.useState(null);
     const { setOpenToast,setMessage, setSeverity } = React.useContext(SnackbarContext)
@@ -44,6 +44,7 @@ export default function FileUploader() {
             setSeverity("error")
             setOpenToast(true)
         })
+        setFiles((prevFiles)=>[...prevFiles,file])
         console.log(file)
     }
     return (

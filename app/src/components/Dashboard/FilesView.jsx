@@ -1,21 +1,15 @@
 import React from 'react'
-import FileCard from './FileCard' 
-import {Grid} from '@mui/material'
+import FileCard from './FileCard'
+import { Grid } from '@mui/material'
 
-export default function FilesView() {
-    const fileNames = [
-        "file1",
-        "file2",
-        "file3",
-        "file4",
-        "file5",
-        "file6",
-    ]
+export default function FilesView({files}) {
+    // TODO Get file list from api
+    
     return (
         <>
-        <Grid container spacing={0}>
-            {fileNames.map((fileName, index) => { return <Grid item xs={12} sm={6} md={3}><FileCard key={index} fileName={fileName} /></Grid>})}
-        </Grid>
+            <Grid container spacing={0}>
+                {files.map((file, index) => { return <Grid item xs={12} sm={6} md={3}><FileCard key={index} fileName={file.name} /></Grid> })}
+            </Grid>
         </>
     )
 }
