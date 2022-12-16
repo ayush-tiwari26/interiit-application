@@ -20,7 +20,7 @@ export const signinController = async (req: Request, res: Response) => {
         throw new UnauthorizedError("Invalid password");
     }
     const userSigninModel: UserResponseModel = new UserResponseModel(user.name, user.email);
-    res.set(HttpHeaders.AUTHORIZATION, JWT.sign({userSigninModel}, process.env.JWT_SECRET_KEY!))
+    res.set(HttpHeaders.AUTHORIZATION, JWT.sign({userSigninModel}, process.env.JWT_SECRET_KEY!, {expiresIn: "1d"}))
         .status(HttpStatus.OK)
         .json(userSigninModel);
 }

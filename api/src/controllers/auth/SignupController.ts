@@ -20,7 +20,7 @@ export const signupController = async (req: Request, res: Response) => {
         throw new BadRequestError("User already exists");
     }
     const userResponseModel: UserResponseModel = new UserResponseModel(savedUserEntity.name, savedUserEntity.email);
-    res.set(HttpHeaders.AUTHORIZATION, JWT.sign({userResponseModel}, process.env.JWT_SECRET_KEY!))
+    res.set(HttpHeaders.AUTHORIZATION, JWT.sign({userResponseModel}, process.env.JWT_SECRET_KEY!, {expiresIn: "1d"}))
         .status(HttpStatus.RESOURCE_CREATED)
         .json(userResponseModel);
 }

@@ -4,7 +4,8 @@ import {ForbiddenError, UnauthorizedError} from "../errors";
 import {HttpHeaders} from "../enums";
 
 export const validateUserToken = (req: Request & {user?: unknown}, res: Response, next: NextFunction) => {
-    const bearerToken = req.headers[HttpHeaders.AUTHORIZATION];
+    let bearerToken = req.headers[HttpHeaders.AUTHORIZATION];
+    if(bearerToken[0]=='"' || bearerToken[0]=="'") bearerToken = bearerToken.substring(1, bearerToken.length-1);
     if (bearerToken === undefined) {
         throw new UnauthorizedError("No Token Provided");
     }

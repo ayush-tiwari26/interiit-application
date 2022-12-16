@@ -3,14 +3,14 @@ import Form from 'react-bootstrap/Form';
 import { Button, Container, Row, Col } from 'react-bootstrap'
 import { SnackbarContext } from '../../providers/SnackBarStateProvider';
 import axios from 'axios';
+import { UserTokenContext } from '../../providers/UserTokenProvider';
 
 export default function FileUploader() {
+    const {userToken} = React.useContext(UserTokenContext)
     const [file, setFile] = React.useState(null);
     const { setOpenToast,setMessage, setSeverity } = React.useContext(SnackbarContext)
-    const fileMimeType = React.useRef();
     function handleChange(event) {
         setFile(event.target.files[0])
-        fileMimeType.current.type = (event.target.files[0].type)
     }
     function handleSubmit(event) {
         event.preventDefault()
@@ -24,23 +24,27 @@ export default function FileUploader() {
         //send as form data
         const formData = new FormData();
         formData.append('file', file);
-        // axios.post('http://localhost:5000/api/upload', formData, {
-        //     headers: {
-        //         'Content-Type': 'multipart/form-data'
-        //     }
-        // }).then(res => {
-        //     setOpenToast(false)
-        //     setMessage("Uploaded File Successfully")
-        //     setSeverity("success")
-        //     setOpenToast(true)
-        // }).catch(err => {
-        //     setOpenToast(false)
-        //     setMessage("Error Uploading File")
-        //     setSeverity("error")
-        //     setOpenToast(true)
-        // })
+        axios.post('http://localhost:5000/api/upload', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+                'authorization': userToken
+            }
+        }).then(res => {
+            setOpenToast(false)
+            setMessage("Uploaded File Successfully")
+            setSeverity("success")
+            setOpenToast(true)
+        }).catch(err => {
+            setOpenToast(false)
+            if(err.response.status===401){
+                setMessage("Please Login")
+            }else{
+                setMessage("Error Uploading File "+err.response.status)
+            }
+            setSeverity("error")
+            setOpenToast(true)
+        })
         console.log(file)
-        console.log(fileMimeType.current.type)
     }
     return (
         <Form onSubmit={handleSubmit} style={{width:'600px'}}>
